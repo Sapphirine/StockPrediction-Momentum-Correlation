@@ -1,8 +1,11 @@
 # StockPrediction-Momentum-Correlation
 
 Member: Di Zuo (dz2357), Nijia Yu (jn2585)
+
 Project: Stock prediction based on momentum and correlation
+
 Project ID: 201712-9
+
 Data source: https://stooq.com/db/h/
 
 Note:
@@ -10,8 +13,11 @@ Note:
 
 You should have the following files:
 5_us_txt/
+
 pre_5min - nysemkt stocks.py
+
 correlation_5min.py
+
 correlations_0.9.csv
 
 Run pre_5min - nysemkt stocks.py first, then correlation_5min.py.
