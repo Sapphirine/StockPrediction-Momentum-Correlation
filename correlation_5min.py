@@ -5,12 +5,6 @@ Created on Sat Dec 09 15:10:11 2017
 @author: zuodi
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 12 10:35:23 2017
-
-@author: zuodi
-"""
 
 import numpy as np
 import matplotlib
@@ -35,7 +29,6 @@ class InsufficientData(Exception):
     '''
     When there is no sufficient data to proceed.
     '''
-
     def __init__(self, value):
         self.parameter = value
     def __str__(self):
@@ -59,21 +52,6 @@ def nan_helper(y):
 
     return np.isnan(y), lambda z: z.nonzero()[0]
 
-'''
-# Load raw data and preprocess
-    
-# 369 stocks
-dir = os.getcwd()+"\\us_5min\\nysemkt stocks"
-# 
-#dir = os.getcwd()+"\\us_5min\\all"
-
-dataset_file = sorted(os.listdir(dir))
-
-
-# stocks: directories of all data
-
-stocks = [os.path.join(dir,oneFile) for oneFile in dataset_file]
-'''
 dataset = {}
 with open('stocks_path.txt','rb') as savefile:
     stocks = pickle.load(savefile)
@@ -91,7 +69,6 @@ for stock in stocks:
             if oneRow[0][0] == '2':         # If it starts with '2'
                 oneStockData.append(oneRow)
     print i,'/',len(stocks)
-    #dataset.update({dataset_file[i][0:-7]:oneStockData})
     dataset.update({os.path.basename(stock)[0:-7]:oneStockData})
     i += 1
 
@@ -177,7 +154,6 @@ for eachTimeSeries in dataset.values():
     oneStock = list(oneStock)
     # Reference: https://stackoverflow.com/questions/6518811/interpolate-nan-values-in-a-numpy-array
     formatDataset.append(oneStock)            
-    #formatDataset.append(pd.Series(temp).interpolate())
 
 
 '''
@@ -661,8 +637,8 @@ def regr(stock,show=False,save=False):
             plt.close('all')
     return kernel_score#,svm_score]
     
-# Test the whole dataset
-# Takes extremely long time!
+# Test the dataset on binary prediction 
+# Takes really long time!
 '''
 print 'Test for binary data:'
 #l=1000
@@ -693,7 +669,11 @@ print np.mean([each for [_,each,_,_] in b_scores])
 print np.mean([each for [_,_,each,_] in b_scores])
 print np.mean([each for [_,_,_,each] in b_scores])
 print
+'''
 
+
+# Test the regression
+'''
 print 'Test for continuous data:'
     
 #l=1000
@@ -752,7 +732,6 @@ def draw_dataset_for_ML_binary(stock,save=False):
         ax.set_ylabel('Normalized L-S')
         ax.set_zlabel('Normalized L-S')
 
-    #ax.set_ylabel('Normalized price')
     ax.legend()
     if save:
         fig.savefig(stock+'_binary_ML_dataset_',dpi=400)
@@ -777,8 +756,6 @@ def draw_dataset_for_ML_continuous(stock,save=False):
             fig.savefig(stock+'_ML_dataset_'+str(i),dpi=400)
             fig.show()
             plt.close('all')
-# Example:
-# draw_dataset_for_ML_continuous('kldx',save=True,binary=False)
 
 
 def draw_LMA_SMA(stock,save=False):
@@ -900,11 +877,5 @@ app.go()
 '''
 # Pipeline:
 Dataset -> preprocess -> SMA and LMA -> normalize -> learn and predict
-# What to visualize:
-1 Stocks price graph
-2 correlated stock-pairs graph
-3 SMA and LMA of some stocks, against the price (To better illustrate the concept)
-4 Dataset for ML (Difference between LMA and SMA times correlation vs. stock price movement)
-5 Binary and continuous prediction (Show my work)
 '''
 
