@@ -27,3 +27,5 @@ Run pre_5min - nysemkt stocks.py first, then correlation_5min.py.
 3. If you want to compute correlation on your own, please uncommnet code between line 297 and 303
 
 4. all_correlations_0.9.csv and all_correlation_0.95.csv are correlations of all stocks, while the other three csv files are correlations of 360 stocks in NYSE market.
+
+5. pre_5min.py is for generating the paths of stock files of whole dataset.
